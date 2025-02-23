@@ -25,3 +25,12 @@ export const getTaskRewardBalance = async (address) => {
     args: [address],
   });
 };
+
+// Function to read contract data
+export const getTaskCount = async () => {
+  return await publicClient.readContract({
+    address: contractAddress,
+    abi,
+    functionName: "taskCount",
+  });
+};

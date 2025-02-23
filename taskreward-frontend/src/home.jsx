@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { useAccount, useDisconnect, useConnect } from 'wagmi'
 import { injected } from "wagmi/connectors";
-import { getTaskRewardBalance } from "./contract";
+import { getTaskCount } from "./contract";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export const Home = () => {
     const { connect } = useConnect({connector: new injected()});
     const { disconnect } = useDisconnect();
     const { address, isConnected } = useAccount();
-    const [balance, setBalance] = useState(null);
+    const [taskCount, setTaskCount] = useState(null);
 
-    const fetchBalance = async () => {
-        if (address) {
-        const balance = await getTaskRewardBalance(address);
-        setBalance(balance.toString());
-        }
+    const fetchTaskCount = async () => {
+        const taskCount = await getTaskCount();
+        setTaskCount(taskCount.toString());
     };
 
     return (
@@ -23,11 +22,11 @@ export const Home = () => {
                 <div>
                 <p>Connected as: {address}</p>
                 <button onClick={disconnect}>Disconnect</button>
-                <button onClick={fetchBalance}>Get Balance</button>
-                {balance && <p>Your Balance: {balance}</p>}
+                <button onClick={fetchTaskCount}>Get Task Count</button>
+                {taskCount && <p>Number of Tasks: {taskCount}</p>}
                 </div>
             ) : (
-                <button onClick={connect}>Connect Wallet</button>
+                <ConnectButton/>
             )}
         </div>
     )
