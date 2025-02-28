@@ -34,3 +34,12 @@ export const getTaskCount = async () => {
     functionName: "taskCount",
   });
 };
+
+export const createNewTask = async (description, reward) => {
+  return await walletClient.writeContract({
+    address: contractAddress,
+    abi,
+    functionName: "createTask",
+    args: [description, reward],
+  });
+}

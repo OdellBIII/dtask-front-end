@@ -3,6 +3,7 @@ import { useAccount, useDisconnect, useConnect } from 'wagmi'
 import { injected } from "wagmi/connectors";
 import { getTaskCount } from "./contract";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import NewTaskButton from "./new-task-button";
 
 export const Home = () => {
     const { connect } = useConnect({connector: new injected()});
@@ -24,6 +25,7 @@ export const Home = () => {
                 <button onClick={disconnect}>Disconnect</button>
                 <button onClick={fetchTaskCount}>Get Task Count</button>
                 {taskCount && <p>Number of Tasks: {taskCount}</p>}
+                <NewTaskButton/>
                 </div>
             ) : (
                 <ConnectButton/>
