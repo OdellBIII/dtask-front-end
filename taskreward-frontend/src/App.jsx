@@ -2,7 +2,6 @@ import '@rainbow-me/rainbowkit/styles.css';
 
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from "wagmi";
-import { sepolia } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { config } from "./config";
 import { Home } from "./home";

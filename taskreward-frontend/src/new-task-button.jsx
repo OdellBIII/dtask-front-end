@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
-import { createNewTask } from "./contract";
 
-const NewTaskButton = () => {
+const NewTaskButton = ({ onCreateNewTask }) => {
     const [open, setOpen] = useState(false);
     const [description, setDescription] = useState('');
     const [reward, setReward] = useState('');
@@ -16,11 +15,7 @@ const NewTaskButton = () => {
     };
 
     const handleSave = () => {
-        // Handle save logic here
-        console.log('Description:', description);
-        console.log('Reward:', reward);
-        setNewTask(description, reward);
-        setOpen(false);
+        onCreateNewTask(description, reward);
     };
 
     return (
