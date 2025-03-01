@@ -17,6 +17,20 @@ export const getTaskCount = async () => {
   return await contract.taskCount();
 };
 
+// Function to read contract data pertaining to a specific task
+export const getTask = async (index) => {
+  const provider = new ethers.BrowserProvider(window.ethereum);
+  const contract = new ethers.Contract(contractAddress, abi, provider);
+  const taskValues = await contract.tasks(index);
+  return {
+    creator: taskValues[0],
+    description: taskValues[1],
+    reward: ethers.formatEther(taskValues[2]),
+    completed: taskValues[3],
+    approved: taskValues[4],
+  };
+};
+
 export const createNewTask = async (description, reward) => {
   const provider = new ethers.BrowserProvider(window.ethereum);
   const signer = await provider.getSigner();
