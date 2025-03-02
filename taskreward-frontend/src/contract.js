@@ -22,12 +22,14 @@ export const getTask = async (index) => {
   const provider = new ethers.BrowserProvider(window.ethereum);
   const contract = new ethers.Contract(contractAddress, abi, provider);
   const taskValues = await contract.tasks(index);
+  console.log('Task values: ');
+  console.log(taskValues);
   return {
     creator: taskValues[0],
     description: taskValues[1],
     reward: ethers.formatEther(taskValues[2]),
-    completed: taskValues[3],
-    approved: taskValues[4],
+    completed: taskValues[4],
+    approved: taskValues[5],
   };
 };
 
